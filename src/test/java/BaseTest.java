@@ -3,7 +3,8 @@ import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import pages.*;
+import pages.LoginPage;
+import pages.WelcomePage;
 
 import static utils.PropertyLoader.returnConfigValue;
 
@@ -28,6 +29,6 @@ public class BaseTest {
 
     @AfterMethod
     public void tearDown() {
-        driver.quit();
+        DriverFactory.resetDriver();
     }
 }
