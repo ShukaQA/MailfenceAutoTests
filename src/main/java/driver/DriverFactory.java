@@ -14,6 +14,8 @@ public class DriverFactory {
             WebDriverManager.chromedriver().setup();
             ChromeOptions chromeOptions = new ChromeOptionsFactory().build();
             driver = new ChromeDriver(chromeOptions);
+            //Set global wait for 10 sec
+            driver.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(10));
         }
         return driver;
     }

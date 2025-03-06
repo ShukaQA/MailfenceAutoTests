@@ -11,17 +11,19 @@ public class BaseTest {
     @Getter
     private static WebDriver driver;
 
-    public HomePage homePage;
+    public WelcomePage welcomePage;
+    public LoginPage loginPage;
 
     @BeforeMethod
     public void setUp() {
         driver = DriverFactory.getDriver();
         driver.get(returnConfigValue("url.base"));
-        initPages(driver);
+        initPages();
     }
 
-    private void initPages(WebDriver inDriver) {
-        homePage = new HomePage(inDriver);
+    private void initPages() {
+        welcomePage = new WelcomePage();
+        loginPage = new LoginPage();
     }
 
     @AfterMethod
