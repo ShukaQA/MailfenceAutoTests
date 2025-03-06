@@ -3,7 +3,6 @@ package driver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 
 public class DriverFactory {
 
@@ -12,8 +11,7 @@ public class DriverFactory {
     public static WebDriver getDriver() {
         if (driver == null) {
             WebDriverManager.chromedriver().setup();
-            ChromeOptions chromeOptions = new ChromeOptionsFactory().build();
-            driver = new ChromeDriver(chromeOptions);
+            driver = new ChromeDriver(new ChromeOptionsFactory().build());
             //Set global wait for 10 sec
             driver.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(10));
         }
