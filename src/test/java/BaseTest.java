@@ -3,6 +3,7 @@ import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import pages.InboxPage;
 import pages.LoginPage;
 import pages.SendMailPage;
 import pages.WelcomePage;
@@ -20,6 +21,7 @@ public class BaseTest {
     public MailBarPage mailBarPage;
     public SendMailPage sendMailPage;
     public SendMailBarPage sendMailBarPage;
+    public InboxPage inboxPage;
 
     @BeforeMethod
     public void setUp() {
@@ -34,6 +36,7 @@ public class BaseTest {
         mailBarPage = new MailBarPage(driver);
         sendMailPage = new SendMailPage(driver);
         sendMailBarPage = new SendMailBarPage(driver);
+        inboxPage = new InboxPage(driver);
     }
 
     @AfterMethod
