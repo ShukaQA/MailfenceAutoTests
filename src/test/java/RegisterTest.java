@@ -6,7 +6,7 @@ import static utils.PropertyLoader.returnConfigValue;
 public class RegisterTest extends BaseTest {
 
     @Test()
-    public void registrationTest() {
+    public void registrationTest() throws InterruptedException {
         String emailTitle = FakerUtils.generateRandomEmailTitle();
         welcomePage.clickLoginButton();
         loginPage
@@ -18,15 +18,16 @@ public class RegisterTest extends BaseTest {
                 .setSendToAddressInput(returnConfigValue(("userEmail")))
                 .setSubjectInput(emailTitle)
                 .clickAttachmentButton()
-                .setAttachmentFile("C:\\Users\\Giorgi.Shukakidze\\IdeaProjects\\VentionTestProject\\src\\test\\resources\\ExampleForTest.pdf");
+                .setAttachmentFile("src/test/resources/ExampleForTest.pdf")
+                .validateUploadedFileByFileName("ExampleForTest.pdf");
         sendMailBarPage.clickSendMailButton();
-        getDriver().navigate().refresh();
-        try {
-            System.out.println(inboxPage.getNameOfNewMailFromInbox(emailTitle));
-        } catch (Exception e) {
-            getDriver().navigate().refresh();
-            System.out.println(inboxPage.getNameOfNewMailFromInbox(emailTitle));
-        }
+        inboxPage.validateNewEmailFromInboxByTitle(emailTitle)
+                .clickOnEmailFromInboxByTitle(emailTitle);
+        basePage.hoverUploadedFile();
+        openedEmailPage.clickArrowDownButton()
+                .clickOnSaveInDocsButton();
+        documentPopupPage.clickMailImagesButton()
+                .clickSaveButton();
     }
 
 }

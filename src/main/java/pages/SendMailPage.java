@@ -3,11 +3,13 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class SendMailPage {
-    private final WebDriver driver;
+import java.io.File;
+import java.nio.file.Paths;
+
+public class SendMailPage extends BasePage {
 
     public SendMailPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     private final By sendToAddressInputPath = By.xpath("//div[@id='mailTo']/input");
@@ -31,7 +33,13 @@ public class SendMailPage {
     }
 
     public SendMailPage setAttachmentFile(String filePath) {
-        driver.findElement(attachmentInputPath).sendKeys(filePath);
+        String absoluteFilePath = Paths.get(filePath).toAbsolutePath().toString();
+        File file = new File(absoluteFilePath);
+        if (file.exists() && file.isFile()) {
+            driver.findElement(attachmentInputPath).sendKeys(absoluteFilePath);
+        } else {
+            throw new RuntimeException("File not found: " + absoluteFilePath);
+        }
         return this;
     }
 

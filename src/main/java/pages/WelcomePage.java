@@ -3,11 +3,10 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class WelcomePage {
-    private final WebDriver driver;
+public class WelcomePage extends BasePage {
 
     public WelcomePage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     private final By loginButtonPath = By.xpath("//button[@id='signin']");
