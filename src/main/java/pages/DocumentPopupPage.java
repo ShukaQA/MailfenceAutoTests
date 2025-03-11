@@ -25,7 +25,7 @@ public class DocumentPopupPage extends BasePage {
         return this;
     }
 
-    public DocumentPopupPage clickSaveButton() throws InterruptedException {
+    public DocumentPopupPage clickSaveButton() {
         loadSaveButtonBlueColor();
         driver.findElement(saveButtonPath).click();
         return this;

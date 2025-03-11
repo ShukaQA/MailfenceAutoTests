@@ -6,27 +6,27 @@ import static utils.PropertyLoader.returnConfigValue;
 public class RegisterTest extends BaseTest {
 
     @Test()
-    public void registrationTest() throws InterruptedException {
+    public void registrationTest() {
         String emailTitle = FakerUtils.generateRandomEmailTitle();
-        welcomePage.clickLoginButton();
-        loginPage
+        getWelcomePage().clickLoginButton();
+        getLoginPage()
                 .setLoginInput(returnConfigValue("userEmail"))
                 .setPasswordInput(returnConfigValue("password"))
                 .clickEnterButton();
-        mailBarPage.clickNewMailButton();
-        sendMailPage
+        getMailBarPage().clickNewMailButton();
+        getSendMailPage()
                 .setSendToAddressInput(returnConfigValue(("userEmail")))
                 .setSubjectInput(emailTitle)
                 .clickAttachmentButton()
                 .setAttachmentFile("src/test/resources/ExampleForTest.pdf")
                 .validateUploadedFileByFileName("ExampleForTest.pdf");
-        sendMailBarPage.clickSendMailButton();
-        inboxPage.validateNewEmailFromInboxByTitle(emailTitle)
+        getSendMailBarPage().clickSendMailButton();
+        getInboxPage().validateNewEmailFromInboxByTitle(emailTitle)
                 .clickOnEmailFromInboxByTitle(emailTitle);
-        basePage.hoverUploadedFile();
-        openedEmailPage.clickArrowDownButton()
+        getBasePage().hoverUploadedFile();
+        getOpenedEmailPage().clickArrowDownButton()
                 .clickOnSaveInDocsButton();
-        documentPopupPage.clickMailImagesButton()
+        getDocumentPopupPage().clickMailImagesButton()
                 .clickSaveButton();
     }
 

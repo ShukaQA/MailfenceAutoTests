@@ -13,38 +13,88 @@ public class BaseTest {
     @Getter
     private static WebDriver driver;
 
-    public BasePage basePage;
-    public WelcomePage welcomePage;
-    public LoginPage loginPage;
-    public MailBarPage mailBarPage;
-    public SendMailPage sendMailPage;
-    public SendMailBarPage sendMailBarPage;
-    public InboxPage inboxPage;
-    public OpenedEmailPage openedEmailPage;
-    public DocumentPopupPage documentPopupPage;
+    // Page objects are now lazily initialized
+    private BasePage basePage;
+    private WelcomePage welcomePage;
+    private LoginPage loginPage;
+    private MailBarPage mailBarPage;
+    private SendMailPage sendMailPage;
+    private SendMailBarPage sendMailBarPage;
+    private InboxPage inboxPage;
+    private OpenedEmailPage openedEmailPage;
+    private DocumentPopupPage documentPopupPage;
 
     @BeforeMethod
     public void setUp() {
         driver = DriverFactory.getDriver();
         driver.get(returnConfigValue("url.base"));
-        initPages(driver);
     }
 
-    private void initPages(WebDriver driver) {
-        basePage = new BasePage(driver);
-        welcomePage = new WelcomePage(driver);
-        loginPage = new LoginPage(driver);
-        mailBarPage = new MailBarPage(driver);
-        sendMailPage = new SendMailPage(driver);
-        sendMailBarPage = new SendMailBarPage(driver);
-        inboxPage = new InboxPage(driver);
-        openedEmailPage = new OpenedEmailPage(driver);
-        documentPopupPage = new DocumentPopupPage(driver);
+    public BasePage getBasePage() {
+        if (basePage == null) {
+            basePage = new BasePage(driver);
+        }
+        return basePage;
+    }
+
+    public WelcomePage getWelcomePage() {
+        if (welcomePage == null) {
+            welcomePage = new WelcomePage(driver);
+        }
+        return welcomePage;
+    }
+
+    public LoginPage getLoginPage() {
+        if (loginPage == null) {
+            loginPage = new LoginPage(driver);
+        }
+        return loginPage;
+    }
+
+    public MailBarPage getMailBarPage() {
+        if (mailBarPage == null) {
+            mailBarPage = new MailBarPage(driver);
+        }
+        return mailBarPage;
+    }
+
+    public SendMailPage getSendMailPage() {
+        if (sendMailPage == null) {
+            sendMailPage = new SendMailPage(driver);
+        }
+        return sendMailPage;
+    }
+
+    public SendMailBarPage getSendMailBarPage() {
+        if (sendMailBarPage == null) {
+            sendMailBarPage = new SendMailBarPage(driver);
+        }
+        return sendMailBarPage;
+    }
+
+    public InboxPage getInboxPage() {
+        if (inboxPage == null) {
+            inboxPage = new InboxPage(driver);
+        }
+        return inboxPage;
+    }
+
+    public OpenedEmailPage getOpenedEmailPage() {
+        if (openedEmailPage == null) {
+            openedEmailPage = new OpenedEmailPage(driver);
+        }
+        return openedEmailPage;
+    }
+
+    public DocumentPopupPage getDocumentPopupPage() {
+        if (documentPopupPage == null) {
+            documentPopupPage = new DocumentPopupPage(driver);
+        }
+        return documentPopupPage;
     }
 
     @AfterMethod
     public void tearDown() {
         DriverFactory.resetDriver();
     }
-
 }
