@@ -8,25 +8,32 @@ public class RegisterTest extends BaseTest {
     @Test()
     public void registrationTest() {
         String emailTitle = FakerUtils.generateRandomEmailTitle();
-        getWelcomePage().clickLoginButton();
+        getWelcomePage()
+                .clickLoginButton();
         getLoginPage()
                 .setLoginInput(returnConfigValue("userEmail"))
                 .setPasswordInput(returnConfigValue("password"))
                 .clickEnterButton();
-        getMailBarPage().clickNewMailButton();
-        getSendMailPage()
+        getInboxPage().mailBarComponent()
+                .clickNewMailButton();
+        getInboxPage().sendMailComponent()
                 .setSendToAddressInput(returnConfigValue(("userEmail")))
                 .setSubjectInput(emailTitle)
                 .clickAttachmentButton()
                 .setAttachmentFile("src/test/resources/ExampleForTest.pdf")
                 .validateUploadedFileByFileName("ExampleForTest.pdf");
-        getSendMailBarPage().clickSendMailButton();
-        getInboxPage().validateNewEmailFromInboxByTitle(emailTitle)
+        getInboxPage().sendMailBarComponent()
+                .clickSendMailButton();
+        getInboxPage()
+                .validateNewEmailFromInboxByTitle(emailTitle)
                 .clickOnEmailFromInboxByTitle(emailTitle);
-        getBasePage().hoverUploadedFile();
-        getOpenedEmailPage().clickArrowDownButton()
+        getBasePage()
+                .hoverUploadedFile();
+        getInboxPage().openedEmailComponent()
+                .clickArrowDownButton()
                 .clickOnSaveInDocsButton();
-        getDocumentPopupPage().clickMailImagesButton()
+        getInboxPage().documentPopupComponent()
+                .clickMailImagesButton()
                 .clickSaveButton();
     }
 

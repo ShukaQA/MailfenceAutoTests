@@ -3,14 +3,57 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import pages.functionBar.MailBarComponent;
+import pages.functionBar.SendMailBarComponent;
 import utils.Utils;
 
-public class InboxPage extends BasePage{
+public class InboxPage extends BasePage {
+
+    private DocumentPopupComponent documentPopupComponent;
+    private OpenedEmailComponent openedEmailComponent;
+    private MailBarComponent mailBarComponent;
+    private SendMailBarComponent sendMailBarComponent;
+    private SendMailComponent sendMailComponent;
+
     public InboxPage(WebDriver driver) {
         super(driver);
     }
 
-    //TODO show example for dynamic values in xpath
+    public DocumentPopupComponent documentPopupComponent() {
+        if (documentPopupComponent == null) {
+            documentPopupComponent = new DocumentPopupComponent(driver);
+        }
+        return documentPopupComponent;
+    }
+
+    public OpenedEmailComponent openedEmailComponent() {
+        if (openedEmailComponent == null) {
+            openedEmailComponent = new OpenedEmailComponent(driver);
+        }
+        return openedEmailComponent;
+    }
+
+    public MailBarComponent mailBarComponent() {
+        if (mailBarComponent == null) {
+            mailBarComponent = new MailBarComponent(driver);
+        }
+        return mailBarComponent;
+    }
+
+    public SendMailBarComponent sendMailBarComponent() {
+        if (sendMailBarComponent == null) {
+            sendMailBarComponent = new SendMailBarComponent(driver);
+        }
+        return sendMailBarComponent;
+    }
+
+    public SendMailComponent sendMailComponent() {
+        if (sendMailComponent == null) {
+            sendMailComponent = new SendMailComponent(driver);
+        }
+        return sendMailComponent;
+    }
+
     private By getReceivedEmailPathByText(String text) {
         return By.xpath(String.format("//div[@title='%s']", text));
     }
@@ -34,5 +77,4 @@ public class InboxPage extends BasePage{
         driver.findElement(getReceivedEmailPathByText(emailTitle)).click();
         return this;
     }
-
 }

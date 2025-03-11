@@ -3,20 +3,20 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class OpenedEmailPage extends BasePage {
-    public OpenedEmailPage(WebDriver driver) {
+public class OpenedEmailComponent extends BasePage {
+    public OpenedEmailComponent(WebDriver driver) {
         super(driver);
     }
 
     private final By saveInDocumentsButtonPath = By.xpath("//span[text()='Save in Documents']//..");
     private final By arrowDownButtonPath = By.xpath("//b[@class='icon-Arrow-down']");
 
-    public OpenedEmailPage clickOnSaveInDocsButton() {
+    public OpenedEmailComponent clickOnSaveInDocsButton() {
         driver.findElement(saveInDocumentsButtonPath).click();
         return this;
     }
 
-    public OpenedEmailPage clickArrowDownButton() {
+    public OpenedEmailComponent clickArrowDownButton() {
         driver.findElement(arrowDownButtonPath).click();
         return this;
     }

@@ -3,9 +3,10 @@ import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import pages.*;
-import pages.functionBar.MailBarPage;
-import pages.functionBar.SendMailBarPage;
+import pages.BasePage;
+import pages.InboxPage;
+import pages.LoginPage;
+import pages.WelcomePage;
 
 import static utils.PropertyLoader.returnConfigValue;
 
@@ -13,16 +14,11 @@ public class BaseTest {
     @Getter
     private static WebDriver driver;
 
-    // Page objects are now lazily initialized
+    // Page objects are lazily initialized
     private BasePage basePage;
     private WelcomePage welcomePage;
     private LoginPage loginPage;
-    private MailBarPage mailBarPage;
-    private SendMailPage sendMailPage;
-    private SendMailBarPage sendMailBarPage;
     private InboxPage inboxPage;
-    private OpenedEmailPage openedEmailPage;
-    private DocumentPopupPage documentPopupPage;
 
     @BeforeMethod
     public void setUp() {
@@ -51,46 +47,11 @@ public class BaseTest {
         return loginPage;
     }
 
-    public MailBarPage getMailBarPage() {
-        if (mailBarPage == null) {
-            mailBarPage = new MailBarPage(driver);
-        }
-        return mailBarPage;
-    }
-
-    public SendMailPage getSendMailPage() {
-        if (sendMailPage == null) {
-            sendMailPage = new SendMailPage(driver);
-        }
-        return sendMailPage;
-    }
-
-    public SendMailBarPage getSendMailBarPage() {
-        if (sendMailBarPage == null) {
-            sendMailBarPage = new SendMailBarPage(driver);
-        }
-        return sendMailBarPage;
-    }
-
     public InboxPage getInboxPage() {
         if (inboxPage == null) {
             inboxPage = new InboxPage(driver);
         }
         return inboxPage;
-    }
-
-    public OpenedEmailPage getOpenedEmailPage() {
-        if (openedEmailPage == null) {
-            openedEmailPage = new OpenedEmailPage(driver);
-        }
-        return openedEmailPage;
-    }
-
-    public DocumentPopupPage getDocumentPopupPage() {
-        if (documentPopupPage == null) {
-            documentPopupPage = new DocumentPopupPage(driver);
-        }
-        return documentPopupPage;
     }
 
     @AfterMethod

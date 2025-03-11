@@ -9,15 +9,15 @@ import pages.BasePage;
 
 import java.time.Duration;
 
-public class MailBarPage extends BasePage {
+public class MailBarComponent extends BasePage {
 
-    public MailBarPage(WebDriver driver) {
+    public MailBarComponent(WebDriver driver) {
         super(driver);
     }
 
     private final By newMailButtonPath = By.xpath("//div[@id='mailNewBtn']");
 
-    public MailBarPage clickNewMailButton() {
+    public MailBarComponent clickNewMailButton() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         WebElement newMailButton = wait.until(ExpectedConditions.elementToBeClickable(newMailButtonPath));
         newMailButton.click();
