@@ -1,7 +1,8 @@
-package pages;
+package pages.components;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import pages.BasePage;
 
 public class OpenedEmailComponent extends BasePage {
     public OpenedEmailComponent(WebDriver driver) {

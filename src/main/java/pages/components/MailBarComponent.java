@@ -1,4 +1,4 @@
-package pages.functionBar;
+package pages.components;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
