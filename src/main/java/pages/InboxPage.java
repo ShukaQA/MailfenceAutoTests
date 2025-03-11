@@ -1,9 +1,9 @@
 package pages;
 
+import components.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import pages.components.*;
 import utils.Utils;
 
 public class InboxPage extends BasePage {
