@@ -9,11 +9,11 @@ public class PropertyLoader {
     private PropertyLoader() {
     }
 
-    public static String returnConfigValue(final String property) {
+    public static String returnConfigValue(final String property, String fileName) {
         Properties properties = new Properties();
 
         try (InputStream propFileInpStream = PropertyLoader.class.getClassLoader()
-                .getResourceAsStream("config.properties")) {
+                .getResourceAsStream(fileName)) {
 
             properties.load(propFileInpStream);
             return properties.getProperty(property);

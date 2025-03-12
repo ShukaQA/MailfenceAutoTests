@@ -11,17 +11,17 @@ public class RegisterTest extends BaseTest {
         getWelcomePage()
                 .clickLoginButton();
         getLoginPage()
-                .setLoginInput(returnConfigValue("userEmail"))
-                .setPasswordInput(returnConfigValue("password"))
+                .setLoginInput(returnConfigValue("userEmail", "secret.properties"))
+                .setPasswordInput(returnConfigValue("password", "secret.properties"))
                 .clickEnterButton();
         getInboxPage().mailBarComponent()
                 .clickNewMailButton();
         getInboxPage().sendMailComponent()
-                .setSendToAddressInput(returnConfigValue("userEmail"))
+                .setSendToAddressInput(returnConfigValue("userEmail", "config.properties"))
                 .setSubjectInput(emailTitle)
                 .clickAttachmentButton()
-                .setAttachmentFile(returnConfigValue("filePath"))
-                .validateUploadedFileByFileName(returnConfigValue("fileName"));
+                .setAttachmentFile(returnConfigValue("filePath", "config.properties"))
+                .validateUploadedFileByFileName(returnConfigValue("fileName", "config.properties"));
         getInboxPage().sendMailBarComponent()
                 .clickSendMailButton();
         getInboxPage()
@@ -41,7 +41,7 @@ public class RegisterTest extends BaseTest {
                 .clickMailImagesButton()
                 .dragAndDropTheFile()
                 .clickTrashFolderButton()
-                .checkNewFileExistenceByFileName("»" + returnConfigValue("fileName"));
+                .checkNewFileExistenceByFileName("»" + returnConfigValue("fileName", "config.properties"));
     }
 
 }

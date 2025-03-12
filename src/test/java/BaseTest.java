@@ -23,7 +23,7 @@ public class BaseTest {
     @BeforeMethod
     public void setUp() {
         driver = DriverFactory.getDriver();
-        driver.get(returnConfigValue("url.base"));
+        driver.get(returnConfigValue("url.base", "config.properties"));
     }
 
     public BasePage getBasePage() {
