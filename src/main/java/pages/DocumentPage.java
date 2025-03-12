@@ -43,5 +43,4 @@ public class DocumentPage extends BasePage {
         Assert.assertEquals(driver.findElement(sourceFileInDocPath).getText(), fileName);
         return this;
     }
-
 }

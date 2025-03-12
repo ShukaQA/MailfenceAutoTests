@@ -24,11 +24,15 @@ public class Utils {
             Point targetLocation = targetFileInDocPath.getLocation();
 
             robot.mouseMove(sourceLocation.getX(), sourceLocation.getY() + 150);
+            Thread.sleep(500);
             robot.mouseMove(targetLocation.getX(), targetLocation.getY() + 150);
+            Thread.sleep(500);
             robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
             robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
         } catch (AWTException e) {
             e.printStackTrace();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 }

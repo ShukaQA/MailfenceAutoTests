@@ -20,6 +20,7 @@ public class DriverFactory {
 
     public static void resetDriver() {
         if (driver != null) {
+            driver.close();
             driver.quit();
             driver = null;
         }

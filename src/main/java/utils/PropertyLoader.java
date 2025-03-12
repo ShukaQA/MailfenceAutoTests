@@ -11,10 +11,8 @@ public class PropertyLoader {
 
     public static String returnConfigValue(final String property, String fileName) {
         Properties properties = new Properties();
-
-        try (InputStream propFileInpStream = PropertyLoader.class.getClassLoader()
-                .getResourceAsStream(fileName)) {
-
+        try {
+            InputStream propFileInpStream = PropertyLoader.class.getClassLoader().getResourceAsStream(fileName);
             properties.load(propFileInpStream);
             return properties.getProperty(property);
         } catch (IOException e) {

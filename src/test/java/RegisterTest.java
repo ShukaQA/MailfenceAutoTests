@@ -17,7 +17,7 @@ public class RegisterTest extends BaseTest {
         getInboxPage().mailBarComponent()
                 .clickNewMailButton();
         getInboxPage().sendMailComponent()
-                .setSendToAddressInput(returnConfigValue("userEmail", "config.properties"))
+                .setSendToAddressInput(returnConfigValue("userEmail", "secret.properties"))
                 .setSubjectInput(emailTitle)
                 .clickAttachmentButton()
                 .setAttachmentFile(returnConfigValue("filePath", "config.properties"))
