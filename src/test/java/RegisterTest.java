@@ -17,11 +17,11 @@ public class RegisterTest extends BaseTest {
         getInboxPage().mailBarComponent()
                 .clickNewMailButton();
         getInboxPage().sendMailComponent()
-                .setSendToAddressInput(returnConfigValue(("userEmail")))
+                .setSendToAddressInput(returnConfigValue("userEmail"))
                 .setSubjectInput(emailTitle)
                 .clickAttachmentButton()
-                .setAttachmentFile("src/test/resources/ExampleForTest.pdf")
-                .validateUploadedFileByFileName("ExampleForTest.pdf");
+                .setAttachmentFile(returnConfigValue("filePath"))
+                .validateUploadedFileByFileName(returnConfigValue("fileName"));
         getInboxPage().sendMailBarComponent()
                 .clickSendMailButton();
         getInboxPage()
@@ -35,6 +35,13 @@ public class RegisterTest extends BaseTest {
         getInboxPage().documentPopupComponent()
                 .clickMailImagesButton()
                 .clickSaveButton();
+        getInboxPage().taskBarComponent()
+                .clickOnNavDocButton();
+        getInboxPage().documentPage()
+                .clickMailImagesButton()
+                .dragAndDropTheFile()
+                .clickTrashFolderButton()
+                .checkNewFileExistenceByFileName("»" + returnConfigValue("fileName"));
     }
 
 }

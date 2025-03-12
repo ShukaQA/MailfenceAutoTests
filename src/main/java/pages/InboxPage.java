@@ -13,6 +13,8 @@ public class InboxPage extends BasePage {
     private MailBarComponent mailBarComponent;
     private SendMailBarComponent sendMailBarComponent;
     private SendMailComponent sendMailComponent;
+    private TaskBarComponent taskBarComponent;
+    private DocumentPage documentPage;
 
     public InboxPage(WebDriver driver) {
         super(driver);
@@ -23,6 +25,20 @@ public class InboxPage extends BasePage {
             documentPopupComponent = new DocumentPopupComponent(driver);
         }
         return documentPopupComponent;
+    }
+
+    public DocumentPage documentPage() {
+        if (documentPage == null) {
+            documentPage = new DocumentPage(driver);
+        }
+        return documentPage;
+    }
+
+    public TaskBarComponent taskBarComponent() {
+        if (taskBarComponent == null) {
+            taskBarComponent = new TaskBarComponent(driver);
+        }
+        return taskBarComponent;
     }
 
     public OpenedEmailComponent openedEmailComponent() {
