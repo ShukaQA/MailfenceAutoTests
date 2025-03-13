@@ -1,4 +1,6 @@
+import driver.DriverFactory;
 import org.testng.annotations.Test;
+import pages.*;
 import utils.FakerUtils;
 
 import static utils.PropertyLoader.returnConfigValue;
@@ -8,40 +10,50 @@ public class RegisterTest extends BaseTest {
     @Test()
     public void registrationTest() {
         String emailTitle = FakerUtils.generateRandomEmailTitle();
-        getWelcomePage()
+        WelcomePage welcomePage = new WelcomePage(driver);
+        welcomePage
                 .clickLoginButton();
-        getLoginPage()
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage
                 .setLoginInput(returnConfigValue("userEmail", "secret.properties"))
                 .setPasswordInput(returnConfigValue("password", "secret.properties"))
                 .clickEnterButton();
-        getInboxPage().mailBarComponent()
+
+        InboxPage inboxPage = new InboxPage(driver);
+        inboxPage.mailBarComponent()
                 .clickNewMailButton();
-        getInboxPage().sendMailComponent()
+        inboxPage.sendMailComponent()
                 .setSendToAddressInput(returnConfigValue("userEmail", "secret.properties"))
                 .setSubjectInput(emailTitle)
                 .clickAttachmentButton()
                 .setAttachmentFile(returnConfigValue("filePath", "config.properties"))
                 .validateUploadedFileByFileName(returnConfigValue("fileName", "config.properties"));
-        getInboxPage().sendMailBarComponent()
+        inboxPage.sendMailBarComponent()
                 .clickSendMailButton();
-        getInboxPage()
+        inboxPage
                 .validateNewEmailFromInboxByTitle(emailTitle)
                 .clickOnEmailFromInboxByTitle(emailTitle);
-        getBasePage()
+
+        BasePage basePage = new BasePage(driver);
+        basePage
                 .hoverUploadedFile();
-        getInboxPage().openedEmailComponent()
+        inboxPage.openedEmailComponent()
                 .clickArrowDownButton()
                 .clickOnSaveInDocsButton();
-        getInboxPage().documentPopupComponent()
+        inboxPage.documentPopupComponent()
                 .clickMailImagesButton()
                 .clickSaveButton();
-        getInboxPage().taskBarComponent()
+        inboxPage.taskBarComponent()
                 .clickOnNavDocButton();
-        getInboxPage().documentPage()
+
+        DocumentPage documentPage = new DocumentPage(driver);
+        documentPage
                 .clickMailImagesButton()
                 .dragAndDropTheFile()
                 .clickTrashFolderButton()
                 .checkNewFileExistenceByFileName("»" + returnConfigValue("fileName", "config.properties"));
+
     }
 
 }

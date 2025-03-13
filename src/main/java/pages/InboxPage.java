@@ -8,65 +8,33 @@ import utils.Utils;
 
 public class InboxPage extends BasePage {
 
-    private DocumentPopupComponent documentPopupComponent;
-    private OpenedEmailComponent openedEmailComponent;
-    private MailBarComponent mailBarComponent;
-    private SendMailBarComponent sendMailBarComponent;
-    private SendMailComponent sendMailComponent;
-    private TaskBarComponent taskBarComponent;
-    private DocumentPage documentPage;
-
     public InboxPage(WebDriver driver) {
         super(driver);
     }
 
-    public DocumentPopupComponent documentPopupComponent() {
-        if (documentPopupComponent == null) {
-            documentPopupComponent = new DocumentPopupComponent(driver);
-        }
-        return documentPopupComponent;
-    }
 
-    public DocumentPage documentPage() {
-        if (documentPage == null) {
-            documentPage = new DocumentPage(driver);
-        }
-        return documentPage;
+    public DocumentPopupComponent documentPopupComponent() {
+        return new DocumentPopupComponent(driver);
     }
 
     public TaskBarComponent taskBarComponent() {
-        if (taskBarComponent == null) {
-            taskBarComponent = new TaskBarComponent(driver);
-        }
-        return taskBarComponent;
+        return new TaskBarComponent(driver);
     }
 
     public OpenedEmailComponent openedEmailComponent() {
-        if (openedEmailComponent == null) {
-            openedEmailComponent = new OpenedEmailComponent(driver);
-        }
-        return openedEmailComponent;
+        return new OpenedEmailComponent(driver);
     }
 
     public MailBarComponent mailBarComponent() {
-        if (mailBarComponent == null) {
-            mailBarComponent = new MailBarComponent(driver);
-        }
-        return mailBarComponent;
+        return new MailBarComponent(driver);
     }
 
     public SendMailBarComponent sendMailBarComponent() {
-        if (sendMailBarComponent == null) {
-            sendMailBarComponent = new SendMailBarComponent(driver);
-        }
-        return sendMailBarComponent;
+        return new SendMailBarComponent(driver);
     }
 
     public SendMailComponent sendMailComponent() {
-        if (sendMailComponent == null) {
-            sendMailComponent = new SendMailComponent(driver);
-        }
-        return sendMailComponent;
+        return new SendMailComponent(driver);
     }
 
     private By getReceivedEmailPathByText(String text) {
