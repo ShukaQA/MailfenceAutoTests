@@ -1,6 +1,6 @@
 import application.pages.*;
-import org.testng.annotations.Test;
 import core.utils.FakerUtils;
+import org.testng.annotations.Test;
 
 import static core.utils.PropertyLoader.returnConfigValue;
 
@@ -9,6 +9,7 @@ public class RegisterTest extends BaseTest {
     @Test()
     public void registrationTest() {
         String emailTitle = FakerUtils.generateRandomEmailTitle();
+
         WelcomePage welcomePage = new WelcomePage(driver);
         welcomePage
                 .clickLoginButton();

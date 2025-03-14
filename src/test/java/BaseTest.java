@@ -1,4 +1,5 @@
 import core.driver.DriverFactory;
+import core.utils.PdfUtils;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
@@ -12,6 +13,7 @@ public class BaseTest {
 
     @BeforeMethod
     public void setUp() {
+        PdfUtils.createPdf(returnConfigValue("filePath", "config.properties"), "Some Text");
         driver = DriverFactory.getDriver();
         driver.get(returnConfigValue("url.base", "config.properties"));
     }
