@@ -1,12 +1,12 @@
-package pages;
+package application.pages;
 
-import components.TrashComponent;
+import application.components.TrashComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import utils.Utils;
+import core.utils.Utils;
 
 public class DocumentPage extends BasePage {
     public DocumentPage(WebDriver driver) {

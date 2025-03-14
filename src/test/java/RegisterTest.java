@@ -1,8 +1,8 @@
+import application.pages.*;
 import org.testng.annotations.Test;
-import pages.*;
-import utils.FakerUtils;
+import core.utils.FakerUtils;
 
-import static utils.PropertyLoader.returnConfigValue;
+import static core.utils.PropertyLoader.returnConfigValue;
 
 public class RegisterTest extends BaseTest {
 

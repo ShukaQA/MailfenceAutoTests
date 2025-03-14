@@ -1,8 +1,8 @@
-package components;
+package application.components;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import pages.BasePage;
+import application.pages.BasePage;
 
 import java.io.File;
 import java.nio.file.Paths;

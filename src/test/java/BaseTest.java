@@ -1,10 +1,10 @@
-import driver.DriverFactory;
+import core.driver.DriverFactory;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-import static utils.PropertyLoader.returnConfigValue;
+import static core.utils.PropertyLoader.returnConfigValue;
 
 public class BaseTest {
     @Getter

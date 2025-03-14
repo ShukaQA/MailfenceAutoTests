@@ -1,9 +1,9 @@
-package components;
+package application.components;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import pages.BasePage;
+import application.pages.BasePage;
 
 public class TrashComponent extends BasePage {
     public TrashComponent(WebDriver driver) {

@@ -1,8 +1,8 @@
-package components;
+package application.components;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import pages.BasePage;
+import application.pages.BasePage;
 
 public class SendMailBarComponent extends BasePage {
     public SendMailBarComponent(WebDriver driver) {

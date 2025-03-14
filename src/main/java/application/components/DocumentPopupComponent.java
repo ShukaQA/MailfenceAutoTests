@@ -1,10 +1,10 @@
-package components;
+package application.components;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pages.BasePage;
+import application.pages.BasePage;
 
 public class DocumentPopupComponent extends BasePage {
     public DocumentPopupComponent(WebDriver driver) {
