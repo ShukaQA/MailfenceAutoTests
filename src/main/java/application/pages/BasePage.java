@@ -11,6 +11,8 @@ public class BasePage {
     public BasePage(WebDriver driver) {
         this.driver = driver;
     }
+
+    //TODO change logic for many file uploads
     private final By uploadedFileTextPath = By.xpath("//a[@_type='att']");
 
     public BasePage validateUploadedFileByFileName(String fileName) {

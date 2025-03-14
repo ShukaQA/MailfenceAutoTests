@@ -20,31 +20,31 @@ public class RegisterTest extends BaseTest {
                 .setPasswordInput(returnConfigValue("password", "secret.properties"))
                 .clickEnterButton();
 
-        InboxPage inboxPage = new InboxPage(driver);
-        inboxPage.mailBarComponent()
+        MessagesPage messagesPage = new MessagesPage(driver);
+        messagesPage.mailBarComponent()
                 .clickNewMailButton();
-        inboxPage.sendMailComponent()
+        messagesPage.sendMailComponent()
                 .setSendToAddressInput(returnConfigValue("userEmail", "secret.properties"))
                 .setSubjectInput(emailTitle)
                 .clickAttachmentButton()
                 .setAttachmentFile(returnConfigValue("filePath", "config.properties"))
                 .validateUploadedFileByFileName(returnConfigValue("fileName", "config.properties"));
-        inboxPage.sendMailBarComponent()
+        messagesPage.sendMailBarComponent()
                 .clickSendMailButton();
-        inboxPage
+        messagesPage
                 .validateNewEmailFromInboxByTitle(emailTitle)
                 .clickOnEmailFromInboxByTitle(emailTitle);
 
         BasePage basePage = new BasePage(driver);
         basePage
                 .hoverUploadedFile();
-        inboxPage.openedEmailComponent()
+        messagesPage.openedEmailComponent()
                 .clickArrowDownButton()
                 .clickOnSaveInDocsButton();
-        inboxPage.documentPopupComponent()
+        messagesPage.documentPopupComponent()
                 .clickMailImagesButton()
                 .clickSaveButton();
-        inboxPage.taskBarComponent()
+        messagesPage.taskBarComponent()
                 .clickOnNavDocButton();
 
         DocumentPage documentPage = new DocumentPage(driver);

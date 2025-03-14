@@ -6,9 +6,9 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import core.utils.Utils;
 
-public class InboxPage extends BasePage {
+public class MessagesPage extends BasePage {
 
-    public InboxPage(WebDriver driver) {
+    public MessagesPage(WebDriver driver) {
         super(driver);
     }
 
@@ -44,7 +44,8 @@ public class InboxPage extends BasePage {
         return driver.findElement(getReceivedEmailPathByText(text)).getText();
     }
 
-    public InboxPage validateNewEmailFromInboxByTitle(String emailTitle) {
+    //TODO 2-20 sec logic add
+    public MessagesPage validateNewEmailFromInboxByTitle(String emailTitle) {
         driver.navigate().refresh();
         try {
             Assert.assertEquals(new Utils().getTextFromString(getNameOfNewMailFromInbox(emailTitle)), emailTitle);
@@ -55,7 +56,7 @@ public class InboxPage extends BasePage {
         return this;
     }
 
-    public InboxPage clickOnEmailFromInboxByTitle(String emailTitle) {
+    public MessagesPage clickOnEmailFromInboxByTitle(String emailTitle) {
         driver.findElement(getReceivedEmailPathByText(emailTitle)).click();
         return this;
     }
