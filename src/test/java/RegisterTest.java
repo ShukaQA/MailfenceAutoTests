@@ -1,4 +1,3 @@
-import driver.DriverFactory;
 import org.testng.annotations.Test;
 import pages.*;
 import utils.FakerUtils;
@@ -53,7 +52,11 @@ public class RegisterTest extends BaseTest {
                 .dragAndDropTheFile()
                 .clickTrashFolderButton()
                 .checkNewFileExistenceByFileName("»" + returnConfigValue("fileName", "config.properties"));
-
+        documentPage.trashComponent()
+                .clickSelectAllButton()
+                .clickDeleteButton()
+                .clickYesButton()
+                .checkNoDocTextExistence("There are no documents in this folder yet");
     }
 
 }

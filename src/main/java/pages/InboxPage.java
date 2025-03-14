@@ -12,7 +12,6 @@ public class InboxPage extends BasePage {
         super(driver);
     }
 
-
     public DocumentPopupComponent documentPopupComponent() {
         return new DocumentPopupComponent(driver);
     }

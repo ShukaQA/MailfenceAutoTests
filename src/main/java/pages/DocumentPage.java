@@ -1,5 +1,6 @@
 package pages;
 
+import components.TrashComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,6 +11,10 @@ import utils.Utils;
 public class DocumentPage extends BasePage {
     public DocumentPage(WebDriver driver) {
         super(driver);
+    }
+
+    public TrashComponent trashComponent() {
+        return new TrashComponent(driver);
     }
 
     private final By mailImagesButtonPath = By.xpath("//div[text()='Mail images']");
