@@ -1,6 +1,7 @@
 package application.pages;
 
 import application.components.*;
+import application.elements.ButtonElement;
 import core.utils.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+import java.time.Duration;
 
 public class MessagesPage extends BasePage {
 
@@ -39,30 +42,33 @@ public class MessagesPage extends BasePage {
         return new SendMailComponent(driver);
     }
 
-    private By getReceivedEmailPathByText(String text) {
-        return By.xpath(String.format("//div[@title='%s']", text));
+    private ButtonElement getReceivedEmailButton(String emailTitle) {
+        By emailLocator = By.xpath(String.format("//div[@title='%s']", emailTitle));
+        return new ButtonElement(driver, emailLocator, "Email: " + emailTitle);
     }
 
-    private String getNameOfNewMailFromInbox(String text) {
-        return driver.findElement(getReceivedEmailPathByText(text)).getText();
+    private String getNameOfNewMailFromInbox(String emailTitle) {
+        return getReceivedEmailButton(emailTitle).getText();
     }
 
     public MessagesPage validateNewEmailFromInboxByTitle(String emailTitle) {
-        driver.navigate().refresh();
-        WebDriverWait wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         try {
-            WebElement emailElement = wait.until(ExpectedConditions.visibilityOfElementLocated(getReceivedEmailPathByText(emailTitle)));
+            ButtonElement emailButton = getReceivedEmailButton(emailTitle);
+            WebElement emailElement = wait.until(ExpectedConditions.visibilityOfElementLocated(emailButton.getLocator()));
             Assert.assertEquals(new Utils().getTextFromString(emailElement.getText()), emailTitle);
         } catch (Exception e) {
+            // Retry on failure
             driver.navigate().refresh();
-            WebElement emailElement = wait.until(ExpectedConditions.visibilityOfElementLocated(getReceivedEmailPathByText(emailTitle)));
+            ButtonElement emailButton = getReceivedEmailButton(emailTitle);
+            WebElement emailElement = wait.until(ExpectedConditions.visibilityOfElementLocated(emailButton.getLocator()));
             Assert.assertEquals(new Utils().getTextFromString(emailElement.getText()), emailTitle);
         }
         return this;
     }
 
     public MessagesPage clickOnEmailFromInboxByTitle(String emailTitle) {
-        driver.findElement(getReceivedEmailPathByText(emailTitle)).click();
+        getReceivedEmailButton(emailTitle).click();
         return this;
     }
 }

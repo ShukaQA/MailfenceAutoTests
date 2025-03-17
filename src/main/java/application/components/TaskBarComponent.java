@@ -1,19 +1,22 @@
 package application.components;
 
+import application.elements.ButtonElement;
+import application.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import application.pages.BasePage;
 
 public class TaskBarComponent extends BasePage {
+
+    private ButtonElement navDocButton;
+
     public TaskBarComponent(WebDriver driver) {
         super(driver);
-    }
 
-    private final By navDocButtonPath = By.xpath("//div[@id='nav-docs']");
+        navDocButton = new ButtonElement(driver, By.xpath("//div[@id='nav-docs']"), "Nav Docs Button");
+    }
 
     public TaskBarComponent clickOnNavDocButton() {
-        driver.findElement(navDocButtonPath).click();
+        navDocButton.click();
         return this;
     }
-
 }

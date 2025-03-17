@@ -1,19 +1,23 @@
 package application.components;
 
+import application.elements.ButtonElement;
+import application.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import application.pages.BasePage;
 
 public class SendMailBarComponent extends BasePage {
+
+    private ButtonElement sendEmailButton;
+
     public SendMailBarComponent(WebDriver driver) {
         super(driver);
-    }
 
-    private final By sendEmailButton = By.xpath("//div[text()='Send']/..");
+        // Initialize the ButtonElement with its locator and name
+        sendEmailButton = new ButtonElement(driver, By.xpath("//div[text()='Send']/.."), "Send Email Button");
+    }
 
     public SendMailBarComponent clickSendMailButton() {
-        driver.findElement(sendEmailButton).click();
+        sendEmailButton.click();
         return this;
     }
-
 }

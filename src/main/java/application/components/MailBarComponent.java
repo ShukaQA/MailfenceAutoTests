@@ -1,26 +1,24 @@
 package application.components;
 
+import application.elements.ButtonElement;
+import application.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import application.pages.BasePage;
 
 import java.time.Duration;
 
 public class MailBarComponent extends BasePage {
 
+    private ButtonElement newMailButton;
+
     public MailBarComponent(WebDriver driver) {
         super(driver);
+
+        newMailButton = new ButtonElement(driver, By.xpath("//div[@id='mailNewBtn']"), "New Mail Button");
     }
 
-    private final By newMailButtonPath = By.xpath("//div[@id='mailNewBtn']");
-
     public MailBarComponent clickNewMailButton() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        WebElement newMailButton = wait.until(ExpectedConditions.elementToBeClickable(newMailButtonPath));
-        newMailButton.click();
+        newMailButton.waitForAndClick(Duration.ofSeconds(30));
         return this;
     }
 }

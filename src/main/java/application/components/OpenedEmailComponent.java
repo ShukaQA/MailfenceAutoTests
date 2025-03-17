@@ -1,24 +1,30 @@
 package application.components;
 
+import application.elements.ButtonElement;
+import application.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import application.pages.BasePage;
 
 public class OpenedEmailComponent extends BasePage {
+
+    private ButtonElement saveInDocumentsButton;
+    private ButtonElement arrowDownButton;
+
     public OpenedEmailComponent(WebDriver driver) {
         super(driver);
+
+        // Initialize ButtonElement wrappers with their locators and names
+        saveInDocumentsButton = new ButtonElement(driver, By.xpath("//span[text()='Save in Documents']//.."), "Save in Documents Button");
+        arrowDownButton = new ButtonElement(driver, By.xpath("//b[@class='icon-Arrow-down']"), "Arrow Down Button");
     }
 
-    private final By saveInDocumentsButtonPath = By.xpath("//span[text()='Save in Documents']//..");
-    private final By arrowDownButtonPath = By.xpath("//b[@class='icon-Arrow-down']");
-
     public OpenedEmailComponent clickOnSaveInDocsButton() {
-        driver.findElement(saveInDocumentsButtonPath).click();
+        saveInDocumentsButton.click();
         return this;
     }
 
     public OpenedEmailComponent clickArrowDownButton() {
-        driver.findElement(arrowDownButtonPath).click();
+        arrowDownButton.click();
         return this;
     }
 }
