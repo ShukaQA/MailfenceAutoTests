@@ -1,10 +1,13 @@
 package application.pages;
 
 import application.components.*;
+import core.utils.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import core.utils.Utils;
 
 public class MessagesPage extends BasePage {
 
@@ -47,11 +50,14 @@ public class MessagesPage extends BasePage {
     //TODO 2-20 sec logic add
     public MessagesPage validateNewEmailFromInboxByTitle(String emailTitle) {
         driver.navigate().refresh();
+        WebDriverWait wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(10));
         try {
-            Assert.assertEquals(new Utils().getTextFromString(getNameOfNewMailFromInbox(emailTitle)), emailTitle);
+            WebElement emailElement = wait.until(ExpectedConditions.visibilityOfElementLocated(getReceivedEmailPathByText(emailTitle)));
+            Assert.assertEquals(new Utils().getTextFromString(emailElement.getText()), emailTitle);
         } catch (Exception e) {
             driver.navigate().refresh();
-            Assert.assertEquals(new Utils().getTextFromString(getNameOfNewMailFromInbox(emailTitle)), emailTitle);
+            WebElement emailElement = wait.until(ExpectedConditions.visibilityOfElementLocated(getReceivedEmailPathByText(emailTitle)));
+            Assert.assertEquals(new Utils().getTextFromString(emailElement.getText()), emailTitle);
         }
         return this;
     }
