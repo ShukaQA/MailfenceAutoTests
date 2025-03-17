@@ -19,7 +19,6 @@ public class SendMailComponent extends BasePage {
     public SendMailComponent(WebDriver driver) {
         super(driver);
 
-        // Initialize elements with their locators and names
         sendToAddressInput = new InputElement(driver, By.xpath("//div[@id='mailTo']/input"), "Send To Address Input");
         sendSubjectInput = new InputElement(driver, By.xpath("//input[@id='mailSubject']"), "Send Subject Input");
         attachmentButton = new ButtonElement(driver, By.xpath("//a[text()='Attachment']"), "Attachment Button");

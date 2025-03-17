@@ -12,7 +12,6 @@ public class SendMailBarComponent extends BasePage {
     public SendMailBarComponent(WebDriver driver) {
         super(driver);
 
-        // Initialize the ButtonElement with its locator and name
         sendEmailButton = new ButtonElement(driver, By.xpath("//div[text()='Send']/.."), "Send Email Button");
     }
 

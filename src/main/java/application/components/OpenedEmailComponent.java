@@ -13,7 +13,6 @@ public class OpenedEmailComponent extends BasePage {
     public OpenedEmailComponent(WebDriver driver) {
         super(driver);
 
-        // Initialize ButtonElement wrappers with their locators and names
         saveInDocumentsButton = new ButtonElement(driver, By.xpath("//span[text()='Save in Documents']//.."), "Save in Documents Button");
         arrowDownButton = new ButtonElement(driver, By.xpath("//b[@class='icon-Arrow-down']"), "Arrow Down Button");
     }
