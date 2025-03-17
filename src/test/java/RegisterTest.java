@@ -28,7 +28,10 @@ public class RegisterTest extends BaseTest {
                 .setSubjectInput(emailTitle)
                 .clickAttachmentButton()
                 .setAttachmentFile(returnConfigValue("filePath", "config.properties"))
-                .validateUploadedFileByFileName(returnConfigValue("fileName", "config.properties"));
+                .clickAttachmentButton()
+                .setAttachmentFile(returnConfigValue("filePath2", "config.properties"))
+                .validateUploadedFileByFileName(returnConfigValue("fileName", "config.properties"))
+                .validateUploadedFileByFileName(returnConfigValue("fileName2", "config.properties"));
         messagesPage.sendMailBarComponent()
                 .clickSendMailButton();
         messagesPage
@@ -37,7 +40,7 @@ public class RegisterTest extends BaseTest {
 
         BasePage basePage = new BasePage(driver);
         basePage
-                .hoverUploadedFile();
+                .hoverUploadedFile(returnConfigValue("fileName", "config.properties"));
         messagesPage.openedEmailComponent()
                 .clickArrowDownButton()
                 .clickOnSaveInDocsButton();

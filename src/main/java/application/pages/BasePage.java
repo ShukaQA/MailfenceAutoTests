@@ -12,19 +12,20 @@ public class BasePage {
         this.driver = driver;
     }
 
-    //TODO change logic for many file uploads
-    private final By uploadedFileTextPath = By.xpath("//a[@_type='att']");
+    private By getUploadedFilePathByText(String text) {
+        return By.xpath(String.format("//a[contains(text(), '%s')]", text));
+    }
 
     public BasePage validateUploadedFileByFileName(String fileName) {
-        Assert.assertTrue(driver.findElement(uploadedFileTextPath).getText().contains(fileName),
+        Assert.assertTrue(driver.findElement(getUploadedFilePathByText(fileName)).getText().contains(fileName),
                 "Uploaded file name does not match. " +
                         "Expected to contain: " + fileName);
         return this;
     }
 
-    public BasePage hoverUploadedFile() {
+    public BasePage hoverUploadedFile(String fileName) {
         Actions actions = new Actions(driver);
-        actions.moveToElement(driver.findElement(uploadedFileTextPath)).perform();
+        actions.moveToElement(driver.findElement(getUploadedFilePathByText(fileName))).perform();
         return this;
     }
 }

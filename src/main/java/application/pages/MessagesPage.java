@@ -47,7 +47,6 @@ public class MessagesPage extends BasePage {
         return driver.findElement(getReceivedEmailPathByText(text)).getText();
     }
 
-    //TODO 2-20 sec logic add
     public MessagesPage validateNewEmailFromInboxByTitle(String emailTitle) {
         driver.navigate().refresh();
         WebDriverWait wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(10));
