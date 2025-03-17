@@ -22,5 +22,7 @@ public class BaseTest {
     @AfterMethod
     public void tearDown() {
         DriverFactory.resetDriver();
+        PdfUtils.deletePdf(returnConfigValue("filePath", "config.properties"));
+        PdfUtils.deletePdf(returnConfigValue("filePath2", "config.properties"));
     }
 }
