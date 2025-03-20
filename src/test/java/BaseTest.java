@@ -1,4 +1,4 @@
-import core.driver.DriverFactory;
+import core.driver.DriverWrapper;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
@@ -12,12 +12,12 @@ public class BaseTest {
 
     @BeforeMethod
     public void setUp() {
-        driver = DriverFactory.getDriver();
+        driver = DriverWrapper.getDriver();
         driver.get(returnConfigValue("url.base", "config.properties"));
     }
 
     @AfterMethod
     public void tearDown() {
-        DriverFactory.resetDriver();
+        DriverWrapper.resetDriver();
     }
 }

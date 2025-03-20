@@ -18,27 +18,27 @@ public class MessagesPage extends BasePage {
         super(driver);
     }
 
-    public DocumentPopupComponent documentPopupComponent() {
+    public DocumentPopupComponent getDocumentPopupComponent() {
         return new DocumentPopupComponent(driver);
     }
 
-    public TaskBarComponent taskBarComponent() {
+    public TaskBarComponent getTaskBarComponent() {
         return new TaskBarComponent(driver);
     }
 
-    public OpenedEmailComponent openedEmailComponent() {
+    public OpenedEmailComponent getOpenedEmailComponent() {
         return new OpenedEmailComponent(driver);
     }
 
-    public MailBarComponent mailBarComponent() {
+    public MailBarComponent getMailBarComponent() {
         return new MailBarComponent(driver);
     }
 
-    public SendMailBarComponent sendMailBarComponent() {
+    public SendMailBarComponent getSendMailBarComponent() {
         return new SendMailBarComponent(driver);
     }
 
-    public SendMailComponent sendMailComponent() {
+    public SendMailComponent getSendMailComponent() {
         return new SendMailComponent(driver);
     }
 

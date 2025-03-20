@@ -32,9 +32,9 @@ public class RegisterTest extends BaseTest {
                 .clickEnterButton();
 
         MessagesPage messagesPage = new MessagesPage(driver);
-        messagesPage.mailBarComponent()
+        messagesPage.getMailBarComponent()
                 .clickNewMailButton();
-        messagesPage.sendMailComponent()
+        messagesPage.getSendMailComponent()
                 .setSendToAddressInput(returnConfigValue("userEmail", "secret.properties"))
                 .setSubjectInput(emailTitle)
                 .clickAttachmentButton()
@@ -43,7 +43,7 @@ public class RegisterTest extends BaseTest {
                 .setAttachmentFile(generatedPdfPath2)
                 .validateUploadedFileByFileName(filename1)
                 .validateUploadedFileByFileName(filename2);
-        messagesPage.sendMailBarComponent()
+        messagesPage.getSendMailBarComponent()
                 .clickSendMailButton();
         messagesPage
                 .validateNewEmailFromInboxByTitle(emailTitle)
@@ -53,13 +53,13 @@ public class RegisterTest extends BaseTest {
         basePage
                 .hoverUploadedFile(filename1);
 
-        messagesPage.openedEmailComponent()
+        messagesPage.getOpenedEmailComponent()
                 .clickArrowDownButton()
                 .clickOnSaveInDocsButton();
-        messagesPage.documentPopupComponent()
+        messagesPage.getDocumentPopupComponent()
                 .clickMailImagesButton()
                 .clickSaveButton();
-        messagesPage.taskBarComponent()
+        messagesPage.getTaskBarComponent()
                 .clickOnNavDocButton();
 
         DocumentPage documentPage = new DocumentPage(driver);
