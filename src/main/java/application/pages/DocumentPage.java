@@ -22,8 +22,8 @@ public class DocumentPage extends BasePage {
         trashFolderButton = new ButtonElement(driver, By.xpath("//div[text()='Trash']"), "Trash Folder Button");
     }
 
-    private TextElement getSourceFileInDoc(String fileName) {
-        By sourceFileInDoc = By.xpath(String.format("//div[text()='%s']", fileName + ".pdf"));
+    private TextElement getSourceFileInDoc(String fileName, String fileFormat) {
+        By sourceFileInDoc = By.xpath(String.format("//div[text()='%s']", fileName + "." + fileFormat));
         return new TextElement(driver, sourceFileInDoc, "fileName: " + sourceFileInDoc);
     }
 
@@ -41,9 +41,9 @@ public class DocumentPage extends BasePage {
         return this;
     }
 
-    public DocumentPage dragAndDropTheFile(String fileName) {
+    public DocumentPage dragAndDropTheFile(String fileName, String fileFormat) {
         new Utils().dragAndDropFileFromTo(
-                driver.findElement(getSourceFileInDoc(fileName).getLocator()),
+                driver.findElement(getSourceFileInDoc(fileName, fileFormat).getLocator()),
                 driver.findElement(trashFolderButton.getLocator()),
                 driver);
         return this;
@@ -54,9 +54,9 @@ public class DocumentPage extends BasePage {
         return this;
     }
 
-    public DocumentPage checkNewFileExistenceByFileName(String fileName) {
-        String fileText = getSourceFileInDoc(fileName).getText();
-        Assert.assertEquals(fileText, "»" + fileName + ".pdf", "The file name does not match");
+    public DocumentPage checkNewFileExistenceByFileName(String fileName, String fileFormat) {
+        String fileText = getSourceFileInDoc(fileName, fileFormat).getText();
+        Assert.assertEquals(fileText, "»" + fileName + "." + fileFormat, "The file name does not match");
         return this;
     }
 }

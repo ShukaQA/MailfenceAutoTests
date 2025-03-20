@@ -1,3 +1,4 @@
+import application.enums.FileFormatEnum;
 import application.pages.*;
 import core.utils.FakerUtils;
 import core.utils.PdfUtils;
@@ -9,6 +10,7 @@ public class RegisterTest extends BaseTest {
     String emailTitle = FakerUtils.generateRandomEmailTitle();
     String generatedPdfPath1;
     String generatedPdfPath2;
+    String fileFormat = FileFormatEnum.PDF.toString();
     String filename1 = "testPdf1";
     String filename2 = "testPdf2";
 
@@ -63,9 +65,9 @@ public class RegisterTest extends BaseTest {
         DocumentPage documentPage = new DocumentPage(driver);
         documentPage
                 .clickMailImagesButton()
-                .dragAndDropTheFile(filename1)
+                .dragAndDropTheFile(filename1, fileFormat)
                 .clickTrashFolderButton()
-                .checkNewFileExistenceByFileName(filename1);
+                .checkNewFileExistenceByFileName(filename1, fileFormat);
         documentPage.trashComponent()
                 .clickSelectAllButton()
                 .clickDeleteButton()
