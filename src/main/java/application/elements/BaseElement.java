@@ -24,4 +24,8 @@ public abstract class BaseElement {
         return element.getText();
     }
 
+    @Override
+    public String toString() {
+        return String.format("Element[name='%s', locator='%s']", name, locator);
+    }
 }
