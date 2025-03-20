@@ -11,37 +11,44 @@ import com.itextpdf.layout.element.Paragraph;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 public class PdfUtils {
-    public static void createPdf(String fileName, String content) {
-        String dest = fileName;
+
+    public static String generateUniquePdfFilePath(String baseName) {
+        String uniqueName = baseName + ".pdf";
+        String tempDir = System.getProperty("java.io.tmpdir");
+        return Paths.get(tempDir, uniqueName).toString();
+    }
+
+    public static void createPdf(String content, String filePath) {
         PdfWriter writer;
         PdfDocument pdfDocument;
         try {
-            writer = new PdfWriter(dest);
+            writer = new PdfWriter(filePath);
             pdfDocument = new PdfDocument(writer);
             Document document = new Document(pdfDocument);
             PdfFont font = PdfFontFactory.createFont(StandardFonts.HELVETICA);
             document.add(new Paragraph(content).setFont(font).setFontSize(12).setFontColor(ColorConstants.BLACK));
             document.close();
-            System.out.println("PDF created successfully at: " + dest);
+            System.out.println("PDF created successfully at: " + filePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static boolean deletePdf(String fileName) {
-        File file = new File(fileName);
+    public static boolean deletePdf(String filePath) {
+        File file = new File(filePath);
         if (file.exists()) {
             boolean isDeleted = file.delete();
             if (isDeleted) {
-                System.out.println("PDF file deleted successfully: " + fileName);
+                System.out.println("PDF file deleted successfully: " + filePath);
             } else {
-                System.out.println("Failed to delete the PDF file: " + fileName);
+                System.out.println("Failed to delete the PDF file: " + filePath);
             }
             return isDeleted;
         } else {
-            System.out.println("PDF file does not exist: " + fileName);
+            System.out.println("PDF file does not exist: " + filePath);
             return false;
         }
     }

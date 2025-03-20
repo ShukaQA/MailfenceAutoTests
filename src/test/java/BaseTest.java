@@ -1,5 +1,4 @@
 import core.driver.DriverFactory;
-import core.utils.PdfUtils;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
@@ -13,8 +12,6 @@ public class BaseTest {
 
     @BeforeMethod
     public void setUp() {
-        PdfUtils.createPdf(returnConfigValue("filePath", "config.properties"), "Some Text");
-        PdfUtils.createPdf(returnConfigValue("filePath2", "config.properties"), "Some Text 2");
         driver = DriverFactory.getDriver();
         driver.get(returnConfigValue("url.base", "config.properties"));
     }
@@ -22,7 +19,5 @@ public class BaseTest {
     @AfterMethod
     public void tearDown() {
         DriverFactory.resetDriver();
-        PdfUtils.deletePdf(returnConfigValue("filePath", "config.properties"));
-        PdfUtils.deletePdf(returnConfigValue("filePath2", "config.properties"));
     }
 }

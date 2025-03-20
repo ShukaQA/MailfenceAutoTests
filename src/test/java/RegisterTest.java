@@ -1,14 +1,23 @@
 import application.pages.*;
 import core.utils.FakerUtils;
+import core.utils.PdfUtils;
 import org.testng.annotations.Test;
 
 import static core.utils.PropertyLoader.returnConfigValue;
 
 public class RegisterTest extends BaseTest {
+    String emailTitle = FakerUtils.generateRandomEmailTitle();
+    String generatedPdfPath1;
+    String generatedPdfPath2;
+    String filename1 = "testPdf1";
+    String filename2 = "testPdf2";
 
     @Test()
     public void registrationTest() {
-        String emailTitle = FakerUtils.generateRandomEmailTitle();
+        generatedPdfPath1 = PdfUtils.generateUniquePdfFilePath(filename1);
+        generatedPdfPath2 = PdfUtils.generateUniquePdfFilePath(filename2);
+        PdfUtils.createPdf("Some Text", generatedPdfPath1);
+        PdfUtils.createPdf("Some Text 2", generatedPdfPath2);
 
         WelcomePage welcomePage = new WelcomePage(driver);
         welcomePage
@@ -27,11 +36,11 @@ public class RegisterTest extends BaseTest {
                 .setSendToAddressInput(returnConfigValue("userEmail", "secret.properties"))
                 .setSubjectInput(emailTitle)
                 .clickAttachmentButton()
-                .setAttachmentFile(returnConfigValue("filePath", "config.properties"))
+                .setAttachmentFile(generatedPdfPath1)
                 .clickAttachmentButton()
-                .setAttachmentFile(returnConfigValue("filePath2", "config.properties"))
-                .validateUploadedFileByFileName(returnConfigValue("fileName", "config.properties"))
-                .validateUploadedFileByFileName(returnConfigValue("fileName2", "config.properties"));
+                .setAttachmentFile(generatedPdfPath2)
+                .validateUploadedFileByFileName(filename1)
+                .validateUploadedFileByFileName(filename2);
         messagesPage.sendMailBarComponent()
                 .clickSendMailButton();
         messagesPage
@@ -40,7 +49,8 @@ public class RegisterTest extends BaseTest {
 
         BasePage basePage = new BasePage(driver);
         basePage
-                .hoverUploadedFile(returnConfigValue("fileName", "config.properties"));
+                .hoverUploadedFile(filename1);
+
         messagesPage.openedEmailComponent()
                 .clickArrowDownButton()
                 .clickOnSaveInDocsButton();
@@ -53,14 +63,18 @@ public class RegisterTest extends BaseTest {
         DocumentPage documentPage = new DocumentPage(driver);
         documentPage
                 .clickMailImagesButton()
-                .dragAndDropTheFile()
+                .dragAndDropTheFile(filename1)
                 .clickTrashFolderButton()
-                .checkNewFileExistenceByFileName("»" + returnConfigValue("fileName", "config.properties"));
+                .checkNewFileExistenceByFileName(filename1);
         documentPage.trashComponent()
                 .clickSelectAllButton()
                 .clickDeleteButton()
                 .clickYesButton()
                 .checkNoDocTextExistence("There are no documents in this folder yet");
+
+        PdfUtils.deletePdf(generatedPdfPath1);
+        PdfUtils.deletePdf(generatedPdfPath2);
+
     }
 
 }

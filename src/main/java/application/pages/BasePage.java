@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 
-//TODO use interface
+//TODO use abstract class
 public class BasePage {
     protected final WebDriver driver;
 
