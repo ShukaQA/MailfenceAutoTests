@@ -1,9 +1,9 @@
 package application.pages;
 
 import application.components.TrashComponent;
+import application.elements.BaseElement;
 import application.elements.ButtonElement;
 import application.elements.TextElement;
-import core.utils.FileActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,6 +14,7 @@ public class DocumentPage extends BasePage {
 
     private ButtonElement mailImagesButton;
     private ButtonElement trashFolderButton;
+
 
     public DocumentPage(WebDriver driver) {
         super(driver);
@@ -42,7 +43,7 @@ public class DocumentPage extends BasePage {
     }
 
     public DocumentPage dragAndDropTheFile(String fileName, String fileFormat) {
-        new FileActions().dragAndDropFileFromTo(
+        new BaseElement(driver).dragAndDropFileFromTo(
                 driver.findElement(getSourceFileInDoc(fileName, fileFormat).getLocator()),
                 driver.findElement(trashFolderButton.getLocator()),
                 driver);

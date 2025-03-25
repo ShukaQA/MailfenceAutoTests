@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.nio.file.Paths;
 
 public class PdfUtils {
-
     public static String generateUniquePdfFilePath(String baseName) {
         String uniqueName = baseName + ".pdf";
         String tempDir = System.getProperty("java.io.tmpdir");
@@ -37,19 +36,25 @@ public class PdfUtils {
         }
     }
 
-    public static boolean deletePdf(String filePath) {
-        File file = new File(filePath);
-        if (file.exists()) {
-            boolean isDeleted = file.delete();
-            if (isDeleted) {
-                System.out.println("PDF file deleted successfully: " + filePath);
+    public static boolean deletePdf(String... filePaths) {
+        boolean allDeleted = true;
+        for (String filePath : filePaths) {
+            File file = new File(filePath);
+            if (file.exists()) {
+                boolean isDeleted = file.delete();
+                if (isDeleted) {
+                    System.out.println("PDF file deleted successfully: " + filePath);
+                } else {
+                    System.out.println("Failed to delete the PDF file: " + filePath);
+                    allDeleted = false;
+                }
             } else {
-                System.out.println("Failed to delete the PDF file: " + filePath);
+                System.out.println("PDF file does not exist: " + filePath);
+                allDeleted = false;
             }
-            return isDeleted;
-        } else {
-            System.out.println("PDF file does not exist: " + filePath);
-            return false;
         }
+
+        return allDeleted;
     }
+
 }

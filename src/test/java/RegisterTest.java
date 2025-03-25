@@ -77,9 +77,6 @@ public class RegisterTest extends BaseTest {
                 .clickYesButton()
                 .checkNoDocTextExistence("There are no documents in this folder yet");
 
-        PdfUtils.deletePdf(generatedPdfPath1);
-        PdfUtils.deletePdf(generatedPdfPath2);
-
+        PdfUtils.deletePdf(generatedPdfPath1, generatedPdfPath2);
     }
-
 }
