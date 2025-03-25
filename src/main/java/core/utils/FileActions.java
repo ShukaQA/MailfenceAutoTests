@@ -7,7 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import java.awt.*;
 import java.awt.event.InputEvent;
-
+//TODO move to baseElement class
 public class FileActions {
     public void dragAndDropFileFromTo(WebElement sourceFileInDocPath, WebElement targetFileInDocPath, WebDriver driver) {
         try {

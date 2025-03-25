@@ -5,6 +5,8 @@ import application.elements.InputElement;
 import application.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -23,6 +25,10 @@ public class SendMailComponent extends BasePage {
         sendSubjectInput = new InputElement(driver, By.xpath("//input[@id='mailSubject']"), "Send Subject Input");
         attachmentButton = new ButtonElement(driver, By.xpath("//a[text()='Attachment']"), "Attachment Button");
         attachmentInput = new InputElement(driver, By.xpath("//form[@id='new_email_attach']/input"), "Attachment Input");
+    }
+
+    private By getUploadedFilePathByText(String text) {
+        return By.xpath(String.format("//a[contains(text(), '%s')]", text));
     }
 
     public SendMailComponent setSendToAddressInput(String text) {
@@ -49,5 +55,21 @@ public class SendMailComponent extends BasePage {
             throw new RuntimeException("File not found: " + absoluteFilePath);
         }
         return this;
+    }
+
+    public void validateUploadedFileByFilesName(String... filenames) {
+        try {
+            for (String filename : filenames)
+                Assert.assertTrue(driver.findElement(getUploadedFilePathByText(filename)).getText().contains(filename),
+                        "Uploaded file name does not match. " +
+                                "Expected to contain: " + filename);
+        } catch (Exception e) {
+            Assert.fail("Uploaded file is not found");
+        }
+    }
+
+    public void hoverUploadedFile(String fileName) {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(driver.findElement(getUploadedFilePathByText(fileName))).perform();
     }
 }

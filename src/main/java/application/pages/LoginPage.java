@@ -29,8 +29,7 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    public LoginPage clickEnterButton() {
+    public void clickEnterButton() {
         enterButton.click();
-        return this;
     }
 }

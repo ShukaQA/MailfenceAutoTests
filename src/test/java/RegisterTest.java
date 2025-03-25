@@ -1,5 +1,8 @@
 import application.enums.FileFormatEnum;
-import application.pages.*;
+import application.pages.DocumentPage;
+import application.pages.LoginPage;
+import application.pages.MessagesPage;
+import application.pages.WelcomePage;
 import core.utils.FakerUtils;
 import core.utils.PdfUtils;
 import org.testng.annotations.Test;
@@ -40,17 +43,17 @@ public class RegisterTest extends BaseTest {
                 .clickAttachmentButton()
                 .setAttachmentFile(generatedPdfPath1)
                 .clickAttachmentButton()
-                .setAttachmentFile(generatedPdfPath2)
-                .validateUploadedFileByFileName(filename1)
-                .validateUploadedFileByFileName(filename2);
+                .setAttachmentFile(generatedPdfPath2);
+        messagesPage.getSendMailComponent()
+                .validateUploadedFileByFilesName(filename1, filename2);
+
         messagesPage.getSendMailBarComponent()
                 .clickSendMailButton();
         messagesPage
                 .validateNewEmailFromInboxByTitle(emailTitle)
                 .clickOnEmailFromInboxByTitle(emailTitle);
 
-        BasePage basePage = new BasePage(driver);
-        basePage
+        messagesPage.getSendMailComponent()
                 .hoverUploadedFile(filename1);
 
         messagesPage.getOpenedEmailComponent()
