@@ -4,25 +4,35 @@ import application.pages.LoginPage;
 import application.pages.MessagesPage;
 import application.pages.WelcomePage;
 import core.utils.FakerUtils;
-import core.utils.PdfUtils;
+import core.utils.FilesUtils;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import static core.utils.PropertyLoader.returnConfigValue;
 
 public class RegisterTest extends BaseTest {
-    String emailTitle = FakerUtils.generateRandomEmailTitle();
+    String emailTitle;
     String generatedPdfPath1;
     String generatedPdfPath2;
-    String fileFormat = FileFormatEnum.PDF.toString();
-    String filename1 = "testPdf1";
-    String filename2 = "testPdf2";
+    String fileFormat;
+    String filename1;
+    String filename2;
+
+    @BeforeTest()
+    public void generateTestData() {
+        emailTitle = FakerUtils.generateRandomEmailTitle();
+        fileFormat = FileFormatEnum.PDF.toString();
+        filename1 = "testPdf1";
+        filename2 = "testPdf2";
+        generatedPdfPath1 = FilesUtils.generateUniqueFilePath(filename1);
+        generatedPdfPath2 = FilesUtils.generateUniqueFilePath(filename2);
+
+    }
 
     @Test()
     public void registrationTest() {
-        generatedPdfPath1 = PdfUtils.generateUniquePdfFilePath(filename1);
-        generatedPdfPath2 = PdfUtils.generateUniquePdfFilePath(filename2);
-        PdfUtils.createPdf("Some Text", generatedPdfPath1);
-        PdfUtils.createPdf("Some Text 2", generatedPdfPath2);
+        FilesUtils.createPdf("Some Text", generatedPdfPath1);
+        FilesUtils.createPdf("Some Text 2", generatedPdfPath2);
 
         WelcomePage welcomePage = new WelcomePage(driver);
         welcomePage
@@ -77,6 +87,6 @@ public class RegisterTest extends BaseTest {
                 .clickYesButton()
                 .checkNoDocTextExistence("There are no documents in this folder yet");
 
-        PdfUtils.deletePdf(generatedPdfPath1, generatedPdfPath2);
+        FilesUtils.delete(generatedPdfPath1, generatedPdfPath2);
     }
 }
