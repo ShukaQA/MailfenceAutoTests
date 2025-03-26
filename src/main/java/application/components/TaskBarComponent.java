@@ -15,8 +15,7 @@ public class TaskBarComponent extends BasePage {
         navDocButton = new ButtonElement(driver, By.xpath("//div[@id='nav-docs']"), "Nav Docs Button");
     }
 
-    public TaskBarComponent clickOnNavDocButton() {
+    public void clickOnNavDocButton() {
         navDocButton.click();
-        return this;
     }
 }

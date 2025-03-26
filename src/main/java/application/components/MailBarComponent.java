@@ -17,8 +17,7 @@ public class MailBarComponent extends BasePage {
         newMailButton = new ButtonElement(driver, By.xpath("//div[@id='mailNewBtn']"), "New Mail Button");
     }
 
-    public MailBarComponent clickNewMailButton() {
+    public void clickNewMailButton() {
         newMailButton.waitForAndClick(Duration.ofSeconds(30));
-        return this;
     }
 }

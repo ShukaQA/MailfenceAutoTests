@@ -15,8 +15,7 @@ public class SendMailBarComponent extends BasePage {
         sendEmailButton = new ButtonElement(driver, By.xpath("//div[text()='Send']/.."), "Send Email Button");
     }
 
-    public SendMailBarComponent clickSendMailButton() {
+    public void clickSendMailButton() {
         sendEmailButton.click();
-        return this;
     }
 }

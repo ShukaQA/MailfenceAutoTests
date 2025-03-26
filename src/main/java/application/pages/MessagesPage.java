@@ -67,8 +67,7 @@ public class MessagesPage extends BasePage {
         return this;
     }
 
-    public MessagesPage clickOnEmailFromInboxByTitle(String emailTitle) {
+    public void clickOnEmailFromInboxByTitle(String emailTitle) {
         getReceivedEmailButton(emailTitle).click();
-        return this;
     }
 }
