@@ -27,13 +27,12 @@ public class RegisterTest extends BaseTest {
         generatedPdfPath1 = FilesUtils.generateUniqueFilePath(filename1);
         generatedPdfPath2 = FilesUtils.generateUniqueFilePath(filename2);
 
+        FilesUtils.createPdf("Some Text", generatedPdfPath1);
+        FilesUtils.createPdf("Some Text 2", generatedPdfPath2);
     }
 
     @Test()
     public void registrationTest() {
-        FilesUtils.createPdf("Some Text", generatedPdfPath1);
-        FilesUtils.createPdf("Some Text 2", generatedPdfPath2);
-
         WelcomePage welcomePage = new WelcomePage(driver);
         welcomePage
                 .clickLoginButton();
