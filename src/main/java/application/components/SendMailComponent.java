@@ -2,7 +2,6 @@ package application.components;
 
 import application.elements.ButtonElement;
 import application.elements.InputElement;
-import application.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -11,16 +10,16 @@ import org.testng.Assert;
 import java.io.File;
 import java.nio.file.Paths;
 
-public class SendMailComponent extends BasePage {
+public class SendMailComponent {
 
+    private WebDriver driver;
     private InputElement sendToAddressInput;
     private InputElement sendSubjectInput;
     private ButtonElement attachmentButton;
     private InputElement attachmentInput;
 
     public SendMailComponent(WebDriver driver) {
-        super(driver);
-
+        this.driver = driver;
         sendToAddressInput = new InputElement(driver, By.xpath("//div[@id='mailTo']/input"), "Send To Address Input");
         sendSubjectInput = new InputElement(driver, By.xpath("//input[@id='mailSubject']"), "Send Subject Input");
         attachmentButton = new ButtonElement(driver, By.xpath("//a[text()='Attachment']"), "Attachment Button");

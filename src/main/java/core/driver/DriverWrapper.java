@@ -3,6 +3,7 @@ package core.driver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class DriverWrapper {
 
@@ -11,8 +12,11 @@ public class DriverWrapper {
     public static WebDriver getDriver() {
         if (driver == null) {
             WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver(new ChromeOptionsFactory().build());
-            //Set global wait for 10 sec
+            ChromeOptions optionsChrome = new ChromeOptions();
+            optionsChrome.addArguments("start-maximized");
+            optionsChrome.addArguments("--ignore-certificate-errors");
+            optionsChrome.addArguments("lang=en-US");
+            driver = new ChromeDriver(optionsChrome);
             driver.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(10));
         }
         return driver;

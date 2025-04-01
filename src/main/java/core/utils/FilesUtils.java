@@ -17,7 +17,6 @@ import java.nio.file.Paths;
 public class FilesUtils {
     public static String generateUniqueFilePath(String baseName) {
         String uniqueName = baseName + "." + FileFormatEnum.PDF.getFormat();
-        System.out.println(uniqueName);
         String tempDir = System.getProperty("java.io.tmpdir");
         return Paths.get(tempDir, uniqueName).toString();
     }
