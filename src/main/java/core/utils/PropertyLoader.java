@@ -16,12 +16,10 @@ public class PropertyLoader {
     public static String returnConfigValue(final String property, String fileName) {
         Properties properties = propertiesCache.get(fileName);
 
-        System.out.println(properties);
         if (properties == null) {
             properties = loadProperties(fileName);
             if (properties != null) {
                 propertiesCache.put(fileName, properties);
-                System.out.println(properties);
             }
         }
         assert properties != null;
