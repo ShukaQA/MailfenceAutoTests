@@ -15,15 +15,16 @@ import java.io.IOException;
 import java.nio.file.Paths;
 
 public class FilesUtils {
+
     public static String generateUniqueFilePath(String baseName) {
         String uniqueName = baseName + "." + FileFormatEnum.PDF.getFormat();
         String tempDir = System.getProperty("java.io.tmpdir");
         return Paths.get(tempDir, uniqueName).toString();
     }
 
-    public static void createPdf(String content, String filePath) {
+    public static PdfDocument createPdf(String content, String filePath) {
         PdfWriter writer;
-        PdfDocument pdfDocument;
+        PdfDocument pdfDocument = null;
         try {
             writer = new PdfWriter(filePath);
             pdfDocument = new PdfDocument(writer);
@@ -35,10 +36,10 @@ public class FilesUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return pdfDocument;
     }
 
-    public static boolean delete(String... filePaths) {
-        boolean allDeleted = true;
+    public static void delete(String... filePaths) {
         for (String filePath : filePaths) {
             File file = new File(filePath);
             if (file.exists()) {
@@ -47,15 +48,11 @@ public class FilesUtils {
                     System.out.println("File deleted successfully: " + filePath);
                 } else {
                     System.out.println("Failed to delete the file: " + filePath);
-                    allDeleted = false;
                 }
             } else {
                 System.out.println("File does not exist: " + filePath);
-                allDeleted = false;
             }
         }
 
-        return allDeleted;
     }
-
 }

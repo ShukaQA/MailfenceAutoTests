@@ -3,6 +3,7 @@ import application.pages.DocumentPage;
 import application.pages.LoginPage;
 import application.pages.MessagesPage;
 import application.pages.WelcomePage;
+import com.itextpdf.kernel.pdf.PdfDocument;
 import core.utils.FakerUtils;
 import core.utils.FilesUtils;
 import org.testng.annotations.BeforeTest;
@@ -17,6 +18,8 @@ public class RegisterTest extends BaseTest {
     String fileFormat;
     String filename1;
     String filename2;
+    PdfDocument pdfDoc1;
+    PdfDocument pdfDoc2;
 
     @BeforeTest()
     public void generateTestData() {
@@ -27,15 +30,14 @@ public class RegisterTest extends BaseTest {
         generatedPdfPath1 = FilesUtils.generateUniqueFilePath(filename1);
         generatedPdfPath2 = FilesUtils.generateUniqueFilePath(filename2);
 
-        FilesUtils.createPdf("Some Text", generatedPdfPath1);
-        FilesUtils.createPdf("Some Text 2", generatedPdfPath2);
+        pdfDoc1 = FilesUtils.createPdf("Some Text", generatedPdfPath1);
+        pdfDoc2 = FilesUtils.createPdf("Some Text 2", generatedPdfPath2);
     }
 
     @Test()
     public void registrationTest() {
         WelcomePage welcomePage = new WelcomePage(driver);
-        welcomePage
-                .clickLoginButton();
+        welcomePage.clickLoginButton();
 
         LoginPage loginPage = new LoginPage(driver);
         loginPage
@@ -80,6 +82,7 @@ public class RegisterTest extends BaseTest {
                 .dragAndDropTheFile(filename1, fileFormat)
                 .clickTrashFolderButton()
                 .checkNewFileExistenceByFileName(filename1, fileFormat);
+
         documentPage.trashComponent()
                 .clickSelectAllButton()
                 .clickDeleteButton()
