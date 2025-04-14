@@ -36,16 +36,16 @@ public class RegisterTest extends BaseTest {
 
     @Test()
     public void registrationTest() {
-        WelcomePage welcomePage = new WelcomePage(driver);
+        WelcomePage welcomePage = new WelcomePage();
         welcomePage.clickLoginButton();
 
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage();
         loginPage
                 .setLoginInput(returnConfigValue("userEmail", "secret.properties"))
                 .setPasswordInput(returnConfigValue("password", "secret.properties"))
                 .clickEnterButton();
 
-        MessagesPage messagesPage = new MessagesPage(driver);
+        MessagesPage messagesPage = new MessagesPage();
         messagesPage.getMailBarComponent()
                 .clickNewMailButton();
         messagesPage.getSendMailComponent()
@@ -76,7 +76,7 @@ public class RegisterTest extends BaseTest {
         messagesPage.getTaskBarComponent()
                 .clickOnNavDocButton();
 
-        DocumentPage documentPage = new DocumentPage(driver);
+        DocumentPage documentPage = new DocumentPage();
         documentPage
                 .clickMailImagesButton()
                 .dragAndDropTheFile(filename1, fileFormat)

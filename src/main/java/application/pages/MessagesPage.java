@@ -2,6 +2,7 @@ package application.pages;
 
 import application.components.*;
 import application.elements.ButtonElement;
+import core.driver.DriverWrapper;
 import core.utils.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,39 +13,41 @@ import org.testng.Assert;
 
 import java.time.Duration;
 
-public class MessagesPage extends BasePage {
+public class MessagesPage {
 
-    public MessagesPage(WebDriver driver) {
-        super(driver);
+    private WebDriver driver;
+
+    public MessagesPage() {
+        driver = DriverWrapper.getDriver();
     }
 
     public DocumentPopupComponent getDocumentPopupComponent() {
-        return new DocumentPopupComponent(driver);
+        return new DocumentPopupComponent();
     }
 
     public TaskBarComponent getTaskBarComponent() {
-        return new TaskBarComponent(driver);
+        return new TaskBarComponent();
     }
 
     public OpenedEmailComponent getOpenedEmailComponent() {
-        return new OpenedEmailComponent(driver);
+        return new OpenedEmailComponent();
     }
 
     public MailBarComponent getMailBarComponent() {
-        return new MailBarComponent(driver);
+        return new MailBarComponent();
     }
 
     public SendMailBarComponent getSendMailBarComponent() {
-        return new SendMailBarComponent(driver);
+        return new SendMailBarComponent();
     }
 
     public SendMailComponent getSendMailComponent() {
-        return new SendMailComponent(driver);
+        return new SendMailComponent();
     }
 
     private ButtonElement getReceivedEmailButton(String emailTitle) {
         By emailLocator = By.xpath(String.format("//div[@title='%s']", emailTitle));
-        return new ButtonElement(driver, emailLocator, "Email: " + emailTitle);
+        return new ButtonElement(emailLocator, "Email: " + emailTitle);
     }
 
     private String getNameOfNewMailFromInbox(String emailTitle) {

@@ -2,6 +2,7 @@ package application.components;
 
 import application.elements.ButtonElement;
 import application.elements.InputElement;
+import core.driver.DriverWrapper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -18,12 +19,12 @@ public class SendMailComponent {
     private ButtonElement attachmentButton;
     private InputElement attachmentInput;
 
-    public SendMailComponent(WebDriver driver) {
-        this.driver = driver;
-        sendToAddressInput = new InputElement(driver, By.xpath("//div[@id='mailTo']/input"), "Send To Address Input");
-        sendSubjectInput = new InputElement(driver, By.xpath("//input[@id='mailSubject']"), "Send Subject Input");
-        attachmentButton = new ButtonElement(driver, By.xpath("//a[text()='Attachment']"), "Attachment Button");
-        attachmentInput = new InputElement(driver, By.xpath("//form[@id='new_email_attach']/input"), "Attachment Input");
+    public SendMailComponent() {
+        this.driver = DriverWrapper.getDriver();
+        sendToAddressInput = new InputElement(By.xpath("//div[@id='mailTo']/input"), "Send To Address Input");
+        sendSubjectInput = new InputElement(By.xpath("//input[@id='mailSubject']"), "Send Subject Input");
+        attachmentButton = new ButtonElement(By.xpath("//a[text()='Attachment']"), "Attachment Button");
+        attachmentInput = new InputElement(By.xpath("//form[@id='new_email_attach']/input"), "Attachment Input");
     }
 
     private By getUploadedFilePathByText(String text) {

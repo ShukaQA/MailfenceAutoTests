@@ -1,6 +1,7 @@
 package application.components;
 
 import application.elements.ButtonElement;
+import core.driver.DriverWrapper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,10 +16,10 @@ public class DocumentPopupComponent {
 
     private final By saveButtonStatusPath = By.xpath("//div[@id='dialBtn_OK']");
 
-    public DocumentPopupComponent(WebDriver driver) {
-        this.driver = driver;
-        mailImagesButton = new ButtonElement(driver, By.xpath("//div[text()='Mail images']"), "Mail Images Button");
-        saveButton = new ButtonElement(driver, By.xpath("//div[text()='Save']"), "Save Button");
+    public DocumentPopupComponent() {
+        this.driver = DriverWrapper.getDriver();
+        mailImagesButton = new ButtonElement(By.xpath("//div[text()='Mail images']"), "Mail Images Button");
+        saveButton = new ButtonElement(By.xpath("//div[text()='Save']"), "Save Button");
     }
 
     public DocumentPopupComponent clickMailImagesButton() {

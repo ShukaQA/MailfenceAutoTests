@@ -1,5 +1,6 @@
 package application.elements;
 
+import core.driver.DriverWrapper;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
@@ -18,8 +19,8 @@ public class BaseElement {
     @Getter
     private String name;
 
-    public BaseElement(WebDriver driver, By locator, String name) {
-        this.driver = driver;
+    public BaseElement(By locator, String name) {
+        this.driver = DriverWrapper.getDriver();
         this.locator = locator;
         this.name = name;
     }

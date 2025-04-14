@@ -4,32 +4,35 @@ import application.components.TrashComponent;
 import application.elements.BaseElement;
 import application.elements.ButtonElement;
 import application.elements.TextElement;
+import core.driver.DriverWrapper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-public class DocumentPage extends BasePage {
+public class DocumentPage {
+
+    private WebDriver driver;
 
     private ButtonElement mailImagesButton;
     private ButtonElement trashFolderButton;
 
 
-    public DocumentPage(WebDriver driver) {
-        super(driver);
+    public DocumentPage() {
+        driver = DriverWrapper.getDriver();
 
-        mailImagesButton = new ButtonElement(driver, By.xpath("//div[text()='Mail images']"), "Mail Images Button");
-        trashFolderButton = new ButtonElement(driver, By.xpath("//div[text()='Trash']"), "Trash Folder Button");
+        mailImagesButton = new ButtonElement(By.xpath("//div[text()='Mail images']"), "Mail Images Button");
+        trashFolderButton = new ButtonElement(By.xpath("//div[text()='Trash']"), "Trash Folder Button");
     }
 
     private TextElement getSourceFileInDoc(String fileName, String fileFormat) {
         By sourceFileInDoc = By.xpath(String.format("//div[text()='%s']", fileName + "." + fileFormat));
-        return new TextElement(driver, sourceFileInDoc, "fileName: " + sourceFileInDoc);
+        return new TextElement(sourceFileInDoc, "fileName: " + sourceFileInDoc);
     }
 
     public TrashComponent trashComponent() {
-        return new TrashComponent(driver);
+        return new TrashComponent();
     }
 
     public DocumentPage clickMailImagesButton() {

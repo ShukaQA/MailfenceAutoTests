@@ -3,7 +3,6 @@ package application.components;
 import application.elements.ButtonElement;
 import application.elements.TextElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 public class TrashComponent {
@@ -12,11 +11,11 @@ public class TrashComponent {
     private ButtonElement yesButtonPath;
     private TextElement noDocLeftTextPath;
 
-    public TrashComponent(WebDriver driver) {
-        selectAllButtonPath = new ButtonElement(driver, By.xpath("//div[@title='Select all']"), "Select All Button");
-        deleteButtonPath = new ButtonElement(driver, By.xpath("//div[@title='Delete']"), "Delete Button");
-        yesButtonPath = new ButtonElement(driver, By.xpath("//div[@id='dialBtn_YES']"), "Popup Yes Button");
-        noDocLeftTextPath = new TextElement(driver, By.xpath("//div[text()='There are no documents in this folder yet']"), "No Documents Left Text");
+    public TrashComponent() {
+        selectAllButtonPath = new ButtonElement(By.xpath("//div[@title='Select all']"), "Select All Button");
+        deleteButtonPath = new ButtonElement(By.xpath("//div[@title='Delete']"), "Delete Button");
+        yesButtonPath = new ButtonElement(By.xpath("//div[@id='dialBtn_YES']"), "Popup Yes Button");
+        noDocLeftTextPath = new TextElement(By.xpath("//div[text()='There are no documents in this folder yet']"), "No Documents Left Text");
     }
 
     public TrashComponent clickSelectAllButton() {
