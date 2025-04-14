@@ -12,8 +12,8 @@ public class BaseTest {
 
     @BeforeMethod
     public void setUp() {
-        driver = DriverWrapper.getDriver();
-        driver.get(returnConfigValue("url.base", "config.properties"));
+        DriverWrapper.getDriver()
+                .get(returnConfigValue("url.base", "config.properties"));
     }
 
     @AfterMethod
